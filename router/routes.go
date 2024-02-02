@@ -1,41 +1,16 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/lipe7/golang-project/handler"
 )
 
 func initializeRoutes(router *gin.Engine) {
 	v1 := router.Group("/api/v1")
 
-	v1.GET("/opening", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"status": "opening",
-		})
-	})
-
-	v1.POST("/opening", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"status": "POST opening",
-		})
-	})
-
-	v1.DELETE("/opening", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"status": "DELETE opening",
-		})
-	})
-
-	v1.PUT("/opening", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"status": "PUT opening",
-		})
-	})
-
-	v1.GET("/openings", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"status": "openings",
-		})
-	})
+	v1.POST("/opening", handler.CreateOppeningHandler)
+	v1.GET("/opening", handler.ShowOppeningHandler)
+	v1.PUT("/opening", handler.UpdateOppeningHandler)
+	v1.DELETE("/opening", handler.DeleteOppeningHandler)
+	v1.GET("/openings", handler.ListOppeningHandler)
 }
